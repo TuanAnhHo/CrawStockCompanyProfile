@@ -57,7 +57,7 @@ def CheckTableExisting(table_name:str):
     list_table = [i[0] for i in cursor.fetchall()]
     
     if table_name in list_table:
-        return "InsertDataFunction"
+        return "ExistingCompanyProfile"
     else: 
         return "CreateCompanyProfileTable"
 
@@ -117,7 +117,7 @@ def ExistingCompanyProfile(symbol:str) -> list:
     if symbol in existing_symbol_list:
         return 'UpdateCompanyProfile'
     else: 
-        return 'InsertCompanyProfile'
+        return 'InsertCompanyProfile_branch_2'
 
 
 # Function to crawl company profile from FireAnt
@@ -151,7 +151,8 @@ def CrawlCompanyInfo(symbol:str):
     CompanyProfileDict = {str(i): CompanyProfile[i] for i in ListCrawlKeys}
     CompanyProfileDict['overview'] = CompanyProfile['overview'].replace('\r\n', '')
     CompanyProfileDict['created_date'] = current_time
-    CompanyProfileDict['updated_date'] = datetime(1,1,1,0,0,0).strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+    CompanyProfileDict['updated_date'] = None
+    # datetime(1,1,1,0,0,0).strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
     
     return CompanyProfileDict
 
@@ -177,7 +178,7 @@ def InsertCompanyProfile(symbol:str):
     InsertDataScripts = """
             INSERT INTO public.{table_name} ({columns})
             VALUES {values}
-        """.format(table_name="company_profile", columns=columns, values=values)
+        """.format(table_name=table_name, columns=columns, values=values)
     
     InsertDataScripts = InsertDataScripts.replace("None", "NULL")
     
@@ -197,7 +198,43 @@ def InsertCompanyProfile(symbol:str):
 
 
 def UpdateCompanyProfile(symbol:str):
-    return None
+
+    ## Get connection and change to cursor
+    conn = ConnectPostgres()
+    cursor = conn.cursor()   
+    
+    ## Company profile data 
+    print("Get Company profile of {symbol} symbol".format(symbol=symbol))
+    data = CrawlCompanyInfo(symbol)
+    data.pop('created_date')
+    data['updated_date'] = datetime.now(tz=pytz.timezone('Asia/Ho_Chi_Minh')).strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+
+    values_change_list = []
+    for x,y in data.items():
+        values_change_list.append(str(x)+'='+"'"+str(y)+"'")
+
+    values_change = ',\n        '.join(values_change_list).replace("'None'",'NULL')
+    
+    UpdatetDataScripts = """
+    UPDATE {table_name} 
+    SET 
+        {values_change} 
+    WHERE symbol = '{symbol}';
+    """.format(table_name=table_name, symbol=symbol, values_change=values_change)    
+    
+    print("Update profile of {symbol} symbol into table {table_name} in Postgresql.....".format(symbol=symbol, table_name="company_profile"))
+    
+    try:
+        cursor.execute(UpdatetDataScripts)
+        conn.commit()
+        print("Update data successfully")
+        
+        conn.close()
+        print("Close connection")
+    
+    except psycopg2.errors.UniqueViolation as e:
+        print("Failed to insert data")
+        raise e     
 
 
 # Declare default arguments in Airflow
@@ -235,25 +272,28 @@ create_table = PythonOperator(
     dag=dag,
 )
 
-# insert_data = PythonOperator(
-#     task_id = "InsertCompanyProfile",
-#     python_callable=InsertCompanyProfile,
-#     op_kwargs = {'symbol':symbol},
-#     dag=dag,
-# )
+insert_data1 = PythonOperator(
+    task_id = "InsertCompanyProfile_branch_1",
+    python_callable=InsertCompanyProfile,
+    op_kwargs = {'symbol':symbol},
+    dag=dag,
+)
 
-# update_data = PythonOperator(
-#     task_id = "UpdateCompanyProfile",
-#     python_callable=UpdateCompanyProfile,
-#     op_kwargs = {'symbol':symbol},
-#     dag=dag,
-# )
+insert_data2 = PythonOperator(
+    task_id = "InsertCompanyProfile_branch_2",
+    python_callable=InsertCompanyProfile,
+    op_kwargs = {'symbol':symbol},
+    dag=dag,
+)
+
+update_data = PythonOperator(
+    task_id = "UpdateCompanyProfile",
+    python_callable=UpdateCompanyProfile,
+    op_kwargs = {'symbol':symbol},
+    dag=dag,
+)
 
 brand_check_existing_table >> [create_table,branch_check_existing_profile]
-# create_table >> insert_data
-# branch_check_existing_profile >> [insert_data, update_data]
+create_table >> insert_data1
+branch_check_existing_profile >> [insert_data2, update_data]
 
-# ConnectPostgres()
-# A = CheckTableExisting("company_profile")
-# print(A)
-# CreateCompanyProfileTable()
