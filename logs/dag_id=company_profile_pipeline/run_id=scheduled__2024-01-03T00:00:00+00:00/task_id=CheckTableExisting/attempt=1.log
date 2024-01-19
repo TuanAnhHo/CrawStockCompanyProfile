@@ -721,3 +721,24 @@ OSError: [Errno 99] Cannot assign requested address
 [2024-01-19T04:05:33.744+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 204 for task CheckTableExisting ('branch_task_ids' must contain only valid task_ids. Invalid tasks found: {'InsertDataFunction'}.; 94)
 [2024-01-19T04:05:33.779+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
 [2024-01-19T04:05:33.801+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-01-19T04:39:23.824+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-03T00:00:00+00:00 [queued]>
+[2024-01-19T04:39:23.835+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-03T00:00:00+00:00 [queued]>
+[2024-01-19T04:39:23.837+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-01-19T04:39:23.856+0000] {taskinstance.py:2192} INFO - Executing <Task(BranchPythonOperator): CheckTableExisting> on 2024-01-03 00:00:00+00:00
+[2024-01-19T04:39:23.864+0000] {standard_task_runner.py:60} INFO - Started process 208 to run task
+[2024-01-19T04:39:23.868+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'company_profile_pipeline', 'CheckTableExisting', 'scheduled__2024-01-03T00:00:00+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/CrawlCompanyInfo.py', '--cfg-path', '/tmp/tmpagywdd6i']
+[2024-01-19T04:39:23.869+0000] {standard_task_runner.py:88} INFO - Job 6: Subtask CheckTableExisting
+[2024-01-19T04:39:23.917+0000] {task_command.py:423} INFO - Running <TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-03T00:00:00+00:00 [running]> on host ae6c997f1cf2
+[2024-01-19T04:39:23.969+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='anh.ho@tititada.com' AIRFLOW_CTX_DAG_OWNER='anh.ho' AIRFLOW_CTX_DAG_ID='company_profile_pipeline' AIRFLOW_CTX_TASK_ID='CheckTableExisting' AIRFLOW_CTX_EXECUTION_DATE='2024-01-03T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-01-03T00:00:00+00:00'
+[2024-01-19T04:39:23.970+0000] {logging_mixin.py:188} INFO - Connecting to the PostgreSQL database...
+[2024-01-19T04:39:23.974+0000] {logging_mixin.py:188} INFO - PostgreSQL database version:
+[2024-01-19T04:39:23.975+0000] {logging_mixin.py:188} INFO - Successfully connect to Postgresql
+[2024-01-19T04:39:23.976+0000] {logging_mixin.py:188} INFO - ('PostgreSQL 13.13 (Debian 13.13-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit',)
+[2024-01-19T04:39:23.977+0000] {logging_mixin.py:188} INFO - Checking existing table...
+[2024-01-19T04:39:23.979+0000] {python.py:201} INFO - Done. Returned value was: CreateCompanyProfileTable
+[2024-01-19T04:39:23.980+0000] {branch.py:35} INFO - Branch into CreateCompanyProfileTable
+[2024-01-19T04:39:23.980+0000] {skipmixin.py:178} INFO - Following branch CreateCompanyProfileTable
+[2024-01-19T04:39:23.997+0000] {skipmixin.py:244} INFO - Skipping tasks [('ExistingCompanyProfile', -1)]
+[2024-01-19T04:39:24.043+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=company_profile_pipeline, task_id=CheckTableExisting, execution_date=20240103T000000, start_date=20240119T043923, end_date=20240119T043924
+[2024-01-19T04:39:24.084+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-01-19T04:39:24.127+0000] {taskinstance.py:3281} INFO - 1 downstream tasks scheduled from follow-on schedule check

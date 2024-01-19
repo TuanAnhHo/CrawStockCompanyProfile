@@ -1,0 +1,20 @@
+[2024-01-19T08:13:33.135+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: company_profile_pipeline.ExistingCompanyProfile scheduled__2024-01-07T00:00:00+00:00 [queued]>
+[2024-01-19T08:13:33.144+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: company_profile_pipeline.ExistingCompanyProfile scheduled__2024-01-07T00:00:00+00:00 [queued]>
+[2024-01-19T08:13:33.144+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-01-19T08:13:33.154+0000] {taskinstance.py:2192} INFO - Executing <Task(BranchPythonOperator): ExistingCompanyProfile> on 2024-01-07 00:00:00+00:00
+[2024-01-19T08:13:33.161+0000] {standard_task_runner.py:60} INFO - Started process 658 to run task
+[2024-01-19T08:13:33.164+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'company_profile_pipeline', 'ExistingCompanyProfile', 'scheduled__2024-01-07T00:00:00+00:00', '--job-id', '49', '--raw', '--subdir', 'DAGS_FOLDER/CrawlCompanyInfo.py', '--cfg-path', '/tmp/tmpea4dvwcp']
+[2024-01-19T08:13:33.168+0000] {standard_task_runner.py:88} INFO - Job 49: Subtask ExistingCompanyProfile
+[2024-01-19T08:13:33.211+0000] {task_command.py:423} INFO - Running <TaskInstance: company_profile_pipeline.ExistingCompanyProfile scheduled__2024-01-07T00:00:00+00:00 [running]> on host 945ee41ba0c4
+[2024-01-19T08:13:33.278+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='anh.ho@tititada.com' AIRFLOW_CTX_DAG_OWNER='anh.ho' AIRFLOW_CTX_DAG_ID='company_profile_pipeline' AIRFLOW_CTX_TASK_ID='ExistingCompanyProfile' AIRFLOW_CTX_EXECUTION_DATE='2024-01-07T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-01-07T00:00:00+00:00'
+[2024-01-19T08:13:33.281+0000] {logging_mixin.py:188} INFO - Connecting to the PostgreSQL database...
+[2024-01-19T08:13:33.292+0000] {logging_mixin.py:188} INFO - PostgreSQL database version:
+[2024-01-19T08:13:33.293+0000] {logging_mixin.py:188} INFO - Successfully connect to Postgresql
+[2024-01-19T08:13:33.296+0000] {logging_mixin.py:188} INFO - ('PostgreSQL 13.13 (Debian 13.13-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit',)
+[2024-01-19T08:13:33.299+0000] {python.py:201} INFO - Done. Returned value was: InsertCompanyProfile
+[2024-01-19T08:13:33.303+0000] {branch.py:35} INFO - Branch into InsertCompanyProfile
+[2024-01-19T08:13:33.303+0000] {skipmixin.py:178} INFO - Following branch InsertCompanyProfile
+[2024-01-19T08:13:33.335+0000] {skipmixin.py:244} INFO - Skipping tasks [('UpdateCompanyProfile', -1)]
+[2024-01-19T08:13:33.375+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=company_profile_pipeline, task_id=ExistingCompanyProfile, execution_date=20240107T000000, start_date=20240119T081333, end_date=20240119T081333
+[2024-01-19T08:13:33.421+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-01-19T08:13:33.480+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check

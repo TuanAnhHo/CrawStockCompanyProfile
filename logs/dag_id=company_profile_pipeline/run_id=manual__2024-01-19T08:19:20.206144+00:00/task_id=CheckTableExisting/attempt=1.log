@@ -1,0 +1,21 @@
+[2024-01-19T08:19:20.896+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting manual__2024-01-19T08:19:20.206144+00:00 [queued]>
+[2024-01-19T08:19:20.903+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting manual__2024-01-19T08:19:20.206144+00:00 [queued]>
+[2024-01-19T08:19:20.903+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-01-19T08:19:20.909+0000] {taskinstance.py:2192} INFO - Executing <Task(BranchPythonOperator): CheckTableExisting> on 2024-01-19 08:19:20.206144+00:00
+[2024-01-19T08:19:20.914+0000] {standard_task_runner.py:60} INFO - Started process 775 to run task
+[2024-01-19T08:19:20.918+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'company_profile_pipeline', 'CheckTableExisting', 'manual__2024-01-19T08:19:20.206144+00:00', '--job-id', '65', '--raw', '--subdir', 'DAGS_FOLDER/CrawlCompanyInfo.py', '--cfg-path', '/tmp/tmpj0ps0ioe']
+[2024-01-19T08:19:20.919+0000] {standard_task_runner.py:88} INFO - Job 65: Subtask CheckTableExisting
+[2024-01-19T08:19:20.991+0000] {task_command.py:423} INFO - Running <TaskInstance: company_profile_pipeline.CheckTableExisting manual__2024-01-19T08:19:20.206144+00:00 [running]> on host 945ee41ba0c4
+[2024-01-19T08:19:21.070+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='anh.ho@tititada.com' AIRFLOW_CTX_DAG_OWNER='anh.ho' AIRFLOW_CTX_DAG_ID='company_profile_pipeline' AIRFLOW_CTX_TASK_ID='CheckTableExisting' AIRFLOW_CTX_EXECUTION_DATE='2024-01-19T08:19:20.206144+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-01-19T08:19:20.206144+00:00'
+[2024-01-19T08:19:21.072+0000] {logging_mixin.py:188} INFO - Connecting to the PostgreSQL database...
+[2024-01-19T08:19:21.076+0000] {logging_mixin.py:188} INFO - PostgreSQL database version:
+[2024-01-19T08:19:21.077+0000] {logging_mixin.py:188} INFO - Successfully connect to Postgresql
+[2024-01-19T08:19:21.077+0000] {logging_mixin.py:188} INFO - ('PostgreSQL 13.13 (Debian 13.13-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit',)
+[2024-01-19T08:19:21.077+0000] {logging_mixin.py:188} INFO - Checking existing table...
+[2024-01-19T08:19:21.079+0000] {python.py:201} INFO - Done. Returned value was: ExistingCompanyProfile
+[2024-01-19T08:19:21.080+0000] {branch.py:35} INFO - Branch into ExistingCompanyProfile
+[2024-01-19T08:19:21.080+0000] {skipmixin.py:178} INFO - Following branch ExistingCompanyProfile
+[2024-01-19T08:19:21.091+0000] {skipmixin.py:244} INFO - Skipping tasks [('CreateCompanyProfileTable', -1)]
+[2024-01-19T08:19:21.117+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=company_profile_pipeline, task_id=CheckTableExisting, execution_date=20240119T081920, start_date=20240119T081920, end_date=20240119T081921
+[2024-01-19T08:19:21.176+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2024-01-19T08:19:21.199+0000] {taskinstance.py:3281} INFO - 1 downstream tasks scheduled from follow-on schedule check
