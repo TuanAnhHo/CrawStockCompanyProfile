@@ -1,0 +1,723 @@
+[2024-01-18T09:57:06.948+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-18T09:57:06.953+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-18T09:57:06.953+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-01-18T09:57:06.962+0000] {taskinstance.py:2192} INFO - Executing <Task(BranchPythonOperator): CheckTableExisting> on 2024-01-02 00:00:00+00:00
+[2024-01-18T09:57:06.966+0000] {standard_task_runner.py:60} INFO - Started process 84 to run task
+[2024-01-18T09:57:06.970+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'company_profile_pipeline', 'CheckTableExisting', 'scheduled__2024-01-02T00:00:00+00:00', '--job-id', '19', '--raw', '--subdir', 'DAGS_FOLDER/CrawlCompanyInfo.py', '--cfg-path', '/tmp/tmp_qtufw66']
+[2024-01-18T09:57:06.972+0000] {standard_task_runner.py:88} INFO - Job 19: Subtask CheckTableExisting
+[2024-01-18T09:57:07.020+0000] {task_command.py:423} INFO - Running <TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [running]> on host a56b2d2a6d76
+[2024-01-18T09:57:07.084+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='anh.ho@tititada.com' AIRFLOW_CTX_DAG_OWNER='anh.ho' AIRFLOW_CTX_DAG_ID='company_profile_pipeline' AIRFLOW_CTX_TASK_ID='CheckTableExisting' AIRFLOW_CTX_EXECUTION_DATE='2024-01-02T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-01-02T00:00:00+00:00'
+[2024-01-18T09:57:07.091+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 233, in execute
+    return self.do_branch(context, super().execute(context))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 55, in CheckTableExisting
+    cursor = ConnectPostgres().cursor()
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 27, in ConnectPostgres
+    params = ReadConfigFile(relative_path,section)
+  File "/opt/airflow/dags/GetAuthInfoFuncton.py", line 25, in ReadConfigFile
+    raise Exception('Section {0} not found in the {1} file'.format(section, text_file_path))
+Exception: Section Postgresql not found in the /Users/anhho/Desktop/DataEngineer/CrawlStockData/CrawlFunction/Authorization.ini file
+[2024-01-18T09:57:07.102+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=company_profile_pipeline, task_id=CheckTableExisting, execution_date=20240102T000000, start_date=20240118T095706, end_date=20240118T095707
+[2024-01-18T09:57:07.110+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/***/utils/email.py:154: RemovedInAirflow3Warning: Fetching SMTP credentials from configuration variables will be deprecated in a future release. Please set credentials using a connection instead.
+  send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+
+[2024-01-18T09:57:07.111+0000] {configuration.py:1046} WARNING - section/key [smtp/smtp_user] not found in config
+[2024-01-18T09:57:07.111+0000] {email.py:270} INFO - Email alerting: attempt 1
+[2024-01-18T09:57:07.116+0000] {configuration.py:1046} WARNING - section/key [smtp/smtp_user] not found in config
+[2024-01-18T09:57:07.117+0000] {email.py:270} INFO - Email alerting: attempt 1
+[2024-01-18T09:57:07.118+0000] {taskinstance.py:826} ERROR - Failed to send email to: anh.ho@tititada.com
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2335, in _run_raw_task
+    self._execute_task_with_callbacks(context, test_mode, session=session)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2500, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2517, in _execute_task
+    return _execute_task(self, context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 233, in execute
+    return self.do_branch(context, super().execute(context))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 55, in CheckTableExisting
+    cursor = ConnectPostgres().cursor()
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 27, in ConnectPostgres
+    params = ReadConfigFile(relative_path,section)
+  File "/opt/airflow/dags/GetAuthInfoFuncton.py", line 25, in ReadConfigFile
+    raise Exception('Section {0} not found in the {1} file'.format(section, text_file_path))
+Exception: Section Postgresql not found in the /Users/anhho/Desktop/DataEngineer/CrawlStockData/CrawlFunction/Authorization.ini file
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1000, in _email_alert
+    send_email(task.email, subject, html_content)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 154, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 272, in send_mime_email
+    smtp_conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 316, in _get_smtp_connection
+    return smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 310, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 824, in _handle_failure
+    task_instance.email_alert(error, failure_context["task"])
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2947, in email_alert
+    _email_alert(task_instance=self, exception=exception, task=task)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1002, in _email_alert
+    send_email(task.email, subject, html_content_err)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 154, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 272, in send_mime_email
+    smtp_conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 316, in _get_smtp_connection
+    return smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 310, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+[2024-01-18T09:57:07.126+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 19 for task CheckTableExisting (Section Postgresql not found in the /Users/anhho/Desktop/DataEngineer/CrawlStockData/CrawlFunction/Authorization.ini file; 84)
+[2024-01-18T09:57:07.144+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-01-18T09:57:07.164+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-01-18T10:00:56.766+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-18T10:00:56.771+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-18T10:00:56.771+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-01-18T10:00:56.777+0000] {taskinstance.py:2192} INFO - Executing <Task(BranchPythonOperator): CheckTableExisting> on 2024-01-02 00:00:00+00:00
+[2024-01-18T10:00:56.781+0000] {standard_task_runner.py:60} INFO - Started process 176 to run task
+[2024-01-18T10:00:56.783+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'company_profile_pipeline', 'CheckTableExisting', 'scheduled__2024-01-02T00:00:00+00:00', '--job-id', '37', '--raw', '--subdir', 'DAGS_FOLDER/CrawlCompanyInfo.py', '--cfg-path', '/tmp/tmp9izt7189']
+[2024-01-18T10:00:56.784+0000] {standard_task_runner.py:88} INFO - Job 37: Subtask CheckTableExisting
+[2024-01-18T10:00:56.812+0000] {task_command.py:423} INFO - Running <TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [running]> on host a56b2d2a6d76
+[2024-01-18T10:00:56.859+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='anh.ho@tititada.com' AIRFLOW_CTX_DAG_OWNER='anh.ho' AIRFLOW_CTX_DAG_ID='company_profile_pipeline' AIRFLOW_CTX_TASK_ID='CheckTableExisting' AIRFLOW_CTX_EXECUTION_DATE='2024-01-02T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-01-02T00:00:00+00:00'
+[2024-01-18T10:00:56.860+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 233, in execute
+    return self.do_branch(context, super().execute(context))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 55, in CheckTableExisting
+    cursor = ConnectPostgres().cursor()
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 27, in ConnectPostgres
+    params = ReadConfigFile(relative_path,section)
+  File "/opt/airflow/dags/GetAuthInfoFuncton.py", line 25, in ReadConfigFile
+    raise Exception('Section {section} not found in the {text_file_path} file'.format(section=section, text_file_path=text_file_path))
+Exception: Section Postgresql not found in the /Users/anhho/Desktop/DataEngineer/CrawlStockData/ApacheAirflow/Authorization.ini file
+[2024-01-18T10:00:56.865+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=company_profile_pipeline, task_id=CheckTableExisting, execution_date=20240102T000000, start_date=20240118T100056, end_date=20240118T100056
+[2024-01-18T10:00:56.873+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/***/utils/email.py:154: RemovedInAirflow3Warning: Fetching SMTP credentials from configuration variables will be deprecated in a future release. Please set credentials using a connection instead.
+  send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+
+[2024-01-18T10:00:56.873+0000] {configuration.py:1046} WARNING - section/key [smtp/smtp_user] not found in config
+[2024-01-18T10:00:56.874+0000] {email.py:270} INFO - Email alerting: attempt 1
+[2024-01-18T10:00:56.878+0000] {configuration.py:1046} WARNING - section/key [smtp/smtp_user] not found in config
+[2024-01-18T10:00:56.879+0000] {email.py:270} INFO - Email alerting: attempt 1
+[2024-01-18T10:00:56.879+0000] {taskinstance.py:826} ERROR - Failed to send email to: anh.ho@tititada.com
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2335, in _run_raw_task
+    self._execute_task_with_callbacks(context, test_mode, session=session)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2500, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2517, in _execute_task
+    return _execute_task(self, context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 233, in execute
+    return self.do_branch(context, super().execute(context))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 55, in CheckTableExisting
+    cursor = ConnectPostgres().cursor()
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 27, in ConnectPostgres
+    params = ReadConfigFile(relative_path,section)
+  File "/opt/airflow/dags/GetAuthInfoFuncton.py", line 25, in ReadConfigFile
+    raise Exception('Section {section} not found in the {text_file_path} file'.format(section=section, text_file_path=text_file_path))
+Exception: Section Postgresql not found in the /Users/anhho/Desktop/DataEngineer/CrawlStockData/ApacheAirflow/Authorization.ini file
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1000, in _email_alert
+    send_email(task.email, subject, html_content)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 154, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 272, in send_mime_email
+    smtp_conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 316, in _get_smtp_connection
+    return smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 310, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 824, in _handle_failure
+    task_instance.email_alert(error, failure_context["task"])
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2947, in email_alert
+    _email_alert(task_instance=self, exception=exception, task=task)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1002, in _email_alert
+    send_email(task.email, subject, html_content_err)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 154, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 272, in send_mime_email
+    smtp_conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 316, in _get_smtp_connection
+    return smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 310, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+[2024-01-18T10:00:56.888+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 37 for task CheckTableExisting (Section Postgresql not found in the /Users/anhho/Desktop/DataEngineer/CrawlStockData/ApacheAirflow/Authorization.ini file; 176)
+[2024-01-18T10:00:56.915+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-01-18T10:00:56.958+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-01-19T02:23:43.970+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-19T02:23:43.983+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-19T02:23:43.983+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-01-19T02:23:43.991+0000] {taskinstance.py:2192} INFO - Executing <Task(BranchPythonOperator): CheckTableExisting> on 2024-01-02 00:00:00+00:00
+[2024-01-19T02:23:43.996+0000] {standard_task_runner.py:60} INFO - Started process 112 to run task
+[2024-01-19T02:23:43.999+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'company_profile_pipeline', 'CheckTableExisting', 'scheduled__2024-01-02T00:00:00+00:00', '--job-id', '71', '--raw', '--subdir', 'DAGS_FOLDER/CrawlCompanyInfo.py', '--cfg-path', '/tmp/tmpzfk66d3b']
+[2024-01-19T02:23:44.001+0000] {standard_task_runner.py:88} INFO - Job 71: Subtask CheckTableExisting
+[2024-01-19T02:23:44.045+0000] {task_command.py:423} INFO - Running <TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [running]> on host a56b2d2a6d76
+[2024-01-19T02:23:44.109+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='anh.ho@tititada.com' AIRFLOW_CTX_DAG_OWNER='anh.ho' AIRFLOW_CTX_DAG_ID='company_profile_pipeline' AIRFLOW_CTX_TASK_ID='CheckTableExisting' AIRFLOW_CTX_EXECUTION_DATE='2024-01-02T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-01-02T00:00:00+00:00'
+[2024-01-19T02:23:44.110+0000] {logging_mixin.py:188} INFO - Connecting to the PostgreSQL database...
+[2024-01-19T02:25:52.700+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 233, in execute
+    return self.do_branch(context, super().execute(context))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 50, in CheckTableExisting
+    cursor = ConnectPostgres().cursor()
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 41, in ConnectPostgres
+    raise e
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 26, in ConnectPostgres
+    conn = psycopg2.connect(**params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "172.17.0.2", port 5432 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+[2024-01-19T02:25:52.736+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=company_profile_pipeline, task_id=CheckTableExisting, execution_date=20240102T000000, start_date=20240119T022343, end_date=20240119T022552
+[2024-01-19T02:25:52.766+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/***/utils/email.py:154: RemovedInAirflow3Warning: Fetching SMTP credentials from configuration variables will be deprecated in a future release. Please set credentials using a connection instead.
+  send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+
+[2024-01-19T02:25:52.767+0000] {configuration.py:1046} WARNING - section/key [smtp/smtp_user] not found in config
+[2024-01-19T02:25:52.768+0000] {email.py:270} INFO - Email alerting: attempt 1
+[2024-01-19T02:25:52.775+0000] {configuration.py:1046} WARNING - section/key [smtp/smtp_user] not found in config
+[2024-01-19T02:25:52.776+0000] {email.py:270} INFO - Email alerting: attempt 1
+[2024-01-19T02:25:52.777+0000] {taskinstance.py:826} ERROR - Failed to send email to: anh.ho@tititada.com
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2335, in _run_raw_task
+    self._execute_task_with_callbacks(context, test_mode, session=session)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2500, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2517, in _execute_task
+    return _execute_task(self, context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 233, in execute
+    return self.do_branch(context, super().execute(context))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 50, in CheckTableExisting
+    cursor = ConnectPostgres().cursor()
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 41, in ConnectPostgres
+    raise e
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 26, in ConnectPostgres
+    conn = psycopg2.connect(**params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "172.17.0.2", port 5432 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1000, in _email_alert
+    send_email(task.email, subject, html_content)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 154, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 272, in send_mime_email
+    smtp_conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 316, in _get_smtp_connection
+    return smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 310, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 824, in _handle_failure
+    task_instance.email_alert(error, failure_context["task"])
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2947, in email_alert
+    _email_alert(task_instance=self, exception=exception, task=task)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1002, in _email_alert
+    send_email(task.email, subject, html_content_err)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 154, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 272, in send_mime_email
+    smtp_conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 316, in _get_smtp_connection
+    return smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 310, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+[2024-01-19T02:25:52.807+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 71 for task CheckTableExisting (connection to server at "172.17.0.2", port 5432 failed: Connection timed out
+	Is the server running on that host and accepting TCP/IP connections?
+; 112)
+[2024-01-19T02:25:52.840+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-01-19T02:25:52.868+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-01-19T02:30:17.907+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-19T02:30:17.912+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-19T02:30:17.912+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-01-19T02:30:17.918+0000] {taskinstance.py:2192} INFO - Executing <Task(BranchPythonOperator): CheckTableExisting> on 2024-01-02 00:00:00+00:00
+[2024-01-19T02:30:17.922+0000] {standard_task_runner.py:60} INFO - Started process 254 to run task
+[2024-01-19T02:30:17.925+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'company_profile_pipeline', 'CheckTableExisting', 'scheduled__2024-01-02T00:00:00+00:00', '--job-id', '90', '--raw', '--subdir', 'DAGS_FOLDER/CrawlCompanyInfo.py', '--cfg-path', '/tmp/tmpqsijfhtj']
+[2024-01-19T02:30:17.926+0000] {standard_task_runner.py:88} INFO - Job 90: Subtask CheckTableExisting
+[2024-01-19T02:30:17.966+0000] {task_command.py:423} INFO - Running <TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [running]> on host a56b2d2a6d76
+[2024-01-19T02:30:18.005+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='anh.ho@tititada.com' AIRFLOW_CTX_DAG_OWNER='anh.ho' AIRFLOW_CTX_DAG_ID='company_profile_pipeline' AIRFLOW_CTX_TASK_ID='CheckTableExisting' AIRFLOW_CTX_EXECUTION_DATE='2024-01-02T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-01-02T00:00:00+00:00'
+[2024-01-19T02:30:18.006+0000] {logging_mixin.py:188} INFO - Connecting to the PostgreSQL database...
+[2024-01-19T03:14:20.211+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-19T03:14:20.217+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-19T03:14:20.218+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-01-19T03:14:20.229+0000] {taskinstance.py:2192} INFO - Executing <Task(BranchPythonOperator): CheckTableExisting> on 2024-01-02 00:00:00+00:00
+[2024-01-19T03:14:20.234+0000] {standard_task_runner.py:60} INFO - Started process 92 to run task
+[2024-01-19T03:14:20.237+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'company_profile_pipeline', 'CheckTableExisting', 'scheduled__2024-01-02T00:00:00+00:00', '--job-id', '116', '--raw', '--subdir', 'DAGS_FOLDER/CrawlCompanyInfo.py', '--cfg-path', '/tmp/tmp1k3tn6aw']
+[2024-01-19T03:14:20.238+0000] {standard_task_runner.py:88} INFO - Job 116: Subtask CheckTableExisting
+[2024-01-19T03:14:20.300+0000] {task_command.py:423} INFO - Running <TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [running]> on host a56b2d2a6d76
+[2024-01-19T03:14:20.362+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='anh.ho@tititada.com' AIRFLOW_CTX_DAG_OWNER='anh.ho' AIRFLOW_CTX_DAG_ID='company_profile_pipeline' AIRFLOW_CTX_TASK_ID='CheckTableExisting' AIRFLOW_CTX_EXECUTION_DATE='2024-01-02T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-01-02T00:00:00+00:00'
+[2024-01-19T03:14:20.367+0000] {logging_mixin.py:188} INFO - Connecting to the PostgreSQL database...
+[2024-01-19T03:14:20.371+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 233, in execute
+    return self.do_branch(context, super().execute(context))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 50, in CheckTableExisting
+    cursor = ConnectPostgres().cursor()
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 41, in ConnectPostgres
+    raise e
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 26, in ConnectPostgres
+    conn = psycopg2.connect(**params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "0.0.0.0", port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+[2024-01-19T03:14:20.389+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=company_profile_pipeline, task_id=CheckTableExisting, execution_date=20240102T000000, start_date=20240119T031420, end_date=20240119T031420
+[2024-01-19T03:14:20.404+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/***/utils/email.py:154: RemovedInAirflow3Warning: Fetching SMTP credentials from configuration variables will be deprecated in a future release. Please set credentials using a connection instead.
+  send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+
+[2024-01-19T03:14:20.406+0000] {configuration.py:1046} WARNING - section/key [smtp/smtp_user] not found in config
+[2024-01-19T03:14:20.407+0000] {email.py:270} INFO - Email alerting: attempt 1
+[2024-01-19T03:14:20.414+0000] {configuration.py:1046} WARNING - section/key [smtp/smtp_user] not found in config
+[2024-01-19T03:14:20.419+0000] {email.py:270} INFO - Email alerting: attempt 1
+[2024-01-19T03:14:20.420+0000] {taskinstance.py:826} ERROR - Failed to send email to: anh.ho@tititada.com
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2335, in _run_raw_task
+    self._execute_task_with_callbacks(context, test_mode, session=session)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2500, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2517, in _execute_task
+    return _execute_task(self, context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 233, in execute
+    return self.do_branch(context, super().execute(context))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 50, in CheckTableExisting
+    cursor = ConnectPostgres().cursor()
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 41, in ConnectPostgres
+    raise e
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 26, in ConnectPostgres
+    conn = psycopg2.connect(**params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "0.0.0.0", port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1000, in _email_alert
+    send_email(task.email, subject, html_content)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 154, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 272, in send_mime_email
+    smtp_conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 316, in _get_smtp_connection
+    return smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 310, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 824, in _handle_failure
+    task_instance.email_alert(error, failure_context["task"])
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2947, in email_alert
+    _email_alert(task_instance=self, exception=exception, task=task)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1002, in _email_alert
+    send_email(task.email, subject, html_content_err)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 154, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 272, in send_mime_email
+    smtp_conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 316, in _get_smtp_connection
+    return smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 310, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+[2024-01-19T03:14:20.437+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 116 for task CheckTableExisting (connection to server at "0.0.0.0", port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+; 92)
+[2024-01-19T03:14:20.455+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-01-19T03:14:20.478+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-01-19T03:16:01.128+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-19T03:16:01.137+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-19T03:16:01.137+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-01-19T03:16:01.147+0000] {taskinstance.py:2192} INFO - Executing <Task(BranchPythonOperator): CheckTableExisting> on 2024-01-02 00:00:00+00:00
+[2024-01-19T03:16:01.151+0000] {standard_task_runner.py:60} INFO - Started process 220 to run task
+[2024-01-19T03:16:01.155+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'company_profile_pipeline', 'CheckTableExisting', 'scheduled__2024-01-02T00:00:00+00:00', '--job-id', '169', '--raw', '--subdir', 'DAGS_FOLDER/CrawlCompanyInfo.py', '--cfg-path', '/tmp/tmpot1vuiy2']
+[2024-01-19T03:16:01.156+0000] {standard_task_runner.py:88} INFO - Job 169: Subtask CheckTableExisting
+[2024-01-19T03:16:01.185+0000] {task_command.py:423} INFO - Running <TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [running]> on host a56b2d2a6d76
+[2024-01-19T03:16:01.255+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='anh.ho@tititada.com' AIRFLOW_CTX_DAG_OWNER='anh.ho' AIRFLOW_CTX_DAG_ID='company_profile_pipeline' AIRFLOW_CTX_TASK_ID='CheckTableExisting' AIRFLOW_CTX_EXECUTION_DATE='2024-01-02T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-01-02T00:00:00+00:00'
+[2024-01-19T03:16:01.256+0000] {logging_mixin.py:188} INFO - Connecting to the PostgreSQL database...
+[2024-01-19T03:16:01.256+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 233, in execute
+    return self.do_branch(context, super().execute(context))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 50, in CheckTableExisting
+    cursor = ConnectPostgres().cursor()
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 41, in ConnectPostgres
+    raise e
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 26, in ConnectPostgres
+    conn = psycopg2.connect(**params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "0.0.0.0", port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+[2024-01-19T03:16:01.261+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=company_profile_pipeline, task_id=CheckTableExisting, execution_date=20240102T000000, start_date=20240119T031601, end_date=20240119T031601
+[2024-01-19T03:16:01.270+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/***/utils/email.py:154: RemovedInAirflow3Warning: Fetching SMTP credentials from configuration variables will be deprecated in a future release. Please set credentials using a connection instead.
+  send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+
+[2024-01-19T03:16:01.271+0000] {configuration.py:1046} WARNING - section/key [smtp/smtp_user] not found in config
+[2024-01-19T03:16:01.272+0000] {email.py:270} INFO - Email alerting: attempt 1
+[2024-01-19T03:16:01.277+0000] {configuration.py:1046} WARNING - section/key [smtp/smtp_user] not found in config
+[2024-01-19T03:16:01.278+0000] {email.py:270} INFO - Email alerting: attempt 1
+[2024-01-19T03:16:01.278+0000] {taskinstance.py:826} ERROR - Failed to send email to: anh.ho@tititada.com
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2335, in _run_raw_task
+    self._execute_task_with_callbacks(context, test_mode, session=session)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2500, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2517, in _execute_task
+    return _execute_task(self, context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 233, in execute
+    return self.do_branch(context, super().execute(context))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 50, in CheckTableExisting
+    cursor = ConnectPostgres().cursor()
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 41, in ConnectPostgres
+    raise e
+  File "/opt/airflow/dags/CrawlCompanyInfo.py", line 26, in ConnectPostgres
+    conn = psycopg2.connect(**params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "0.0.0.0", port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1000, in _email_alert
+    send_email(task.email, subject, html_content)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 154, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 272, in send_mime_email
+    smtp_conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 316, in _get_smtp_connection
+    return smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 310, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 824, in _handle_failure
+    task_instance.email_alert(error, failure_context["task"])
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2947, in email_alert
+    _email_alert(task_instance=self, exception=exception, task=task)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1002, in _email_alert
+    send_email(task.email, subject, html_content_err)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 154, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 272, in send_mime_email
+    smtp_conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 316, in _get_smtp_connection
+    return smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 310, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+[2024-01-19T03:16:01.289+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 169 for task CheckTableExisting (connection to server at "0.0.0.0", port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+; 220)
+[2024-01-19T03:16:01.327+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-01-19T03:16:01.346+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-01-19T04:05:33.339+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-19T04:05:33.351+0000] {taskinstance.py:1957} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [queued]>
+[2024-01-19T04:05:33.352+0000] {taskinstance.py:2171} INFO - Starting attempt 1 of 1
+[2024-01-19T04:05:33.387+0000] {taskinstance.py:2192} INFO - Executing <Task(BranchPythonOperator): CheckTableExisting> on 2024-01-02 00:00:00+00:00
+[2024-01-19T04:05:33.392+0000] {standard_task_runner.py:60} INFO - Started process 93 to run task
+[2024-01-19T04:05:33.396+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'company_profile_pipeline', 'CheckTableExisting', 'scheduled__2024-01-02T00:00:00+00:00', '--job-id', '203', '--raw', '--subdir', 'DAGS_FOLDER/CrawlCompanyInfo.py', '--cfg-path', '/tmp/tmpmkt_6qko']
+[2024-01-19T04:05:33.397+0000] {standard_task_runner.py:88} INFO - Job 203: Subtask CheckTableExisting
+[2024-01-19T04:05:33.436+0000] {task_command.py:423} INFO - Running <TaskInstance: company_profile_pipeline.CheckTableExisting scheduled__2024-01-02T00:00:00+00:00 [running]> on host f27b64f975c2
+[2024-01-19T04:05:33.482+0000] {taskinstance.py:2481} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='anh.ho@tititada.com' AIRFLOW_CTX_DAG_OWNER='anh.ho' AIRFLOW_CTX_DAG_ID='company_profile_pipeline' AIRFLOW_CTX_TASK_ID='CheckTableExisting' AIRFLOW_CTX_EXECUTION_DATE='2024-01-02T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-01-02T00:00:00+00:00'
+[2024-01-19T04:05:33.483+0000] {logging_mixin.py:188} INFO - Connecting to the PostgreSQL database...
+[2024-01-19T04:05:33.485+0000] {logging_mixin.py:188} INFO - PostgreSQL database version:
+[2024-01-19T04:05:33.486+0000] {logging_mixin.py:188} INFO - Successfully connect to Postgresql
+[2024-01-19T04:05:33.486+0000] {logging_mixin.py:188} INFO - ('PostgreSQL 13.13 (Debian 13.13-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit',)
+[2024-01-19T04:05:33.487+0000] {logging_mixin.py:188} INFO - Checking existing table...
+[2024-01-19T04:05:33.488+0000] {python.py:201} INFO - Done. Returned value was: InsertDataFunction
+[2024-01-19T04:05:33.488+0000] {branch.py:35} INFO - Branch into InsertDataFunction
+[2024-01-19T04:05:33.489+0000] {skipmixin.py:178} INFO - Following branch InsertDataFunction
+[2024-01-19T04:05:33.494+0000] {taskinstance.py:2699} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 233, in execute
+    return self.do_branch(context, super().execute(context))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/branch.py", line 36, in do_branch
+    self.skip_all_except(context["ti"], branches_to_execute)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/skipmixin.py", line 213, in skip_all_except
+    raise AirflowException(
+airflow.exceptions.AirflowException: 'branch_task_ids' must contain only valid task_ids. Invalid tasks found: {'InsertDataFunction'}.
+[2024-01-19T04:05:33.497+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=company_profile_pipeline, task_id=CheckTableExisting, execution_date=20240102T000000, start_date=20240119T040533, end_date=20240119T040533
+[2024-01-19T04:05:33.507+0000] {warnings.py:109} WARNING - /home/***/.local/lib/python3.8/site-packages/***/utils/email.py:154: RemovedInAirflow3Warning: Fetching SMTP credentials from configuration variables will be deprecated in a future release. Please set credentials using a connection instead.
+  send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+
+[2024-01-19T04:05:33.508+0000] {configuration.py:1046} WARNING - section/key [smtp/smtp_user] not found in config
+[2024-01-19T04:05:33.508+0000] {email.py:270} INFO - Email alerting: attempt 1
+[2024-01-19T04:05:33.518+0000] {configuration.py:1046} WARNING - section/key [smtp/smtp_user] not found in config
+[2024-01-19T04:05:33.522+0000] {email.py:270} INFO - Email alerting: attempt 1
+[2024-01-19T04:05:33.524+0000] {taskinstance.py:826} ERROR - Failed to send email to: anh.ho@tititada.com
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2335, in _run_raw_task
+    self._execute_task_with_callbacks(context, test_mode, session=session)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2500, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2517, in _execute_task
+    return _execute_task(self, context, task_orig)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 233, in execute
+    return self.do_branch(context, super().execute(context))
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/branch.py", line 36, in do_branch
+    self.skip_all_except(context["ti"], branches_to_execute)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/skipmixin.py", line 213, in skip_all_except
+    raise AirflowException(
+airflow.exceptions.AirflowException: 'branch_task_ids' must contain only valid task_ids. Invalid tasks found: {'InsertDataFunction'}.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1000, in _email_alert
+    send_email(task.email, subject, html_content)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 154, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 272, in send_mime_email
+    smtp_conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 316, in _get_smtp_connection
+    return smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 310, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 824, in _handle_failure
+    task_instance.email_alert(error, failure_context["task"])
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 2947, in email_alert
+    _email_alert(task_instance=self, exception=exception, task=task)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 1002, in _email_alert
+    send_email(task.email, subject, html_content_err)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 80, in send_email
+    return backend(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 154, in send_email_smtp
+    send_mime_email(e_from=mail_from, e_to=recipients, mime_msg=msg, conn_id=conn_id, dryrun=dryrun)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 272, in send_mime_email
+    smtp_conn = _get_smtp_connection(smtp_host, smtp_port, smtp_timeout, smtp_ssl)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/utils/email.py", line 316, in _get_smtp_connection
+    return smtplib.SMTP(host=host, port=port, timeout=timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 255, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/local/lib/python3.8/smtplib.py", line 339, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/local/lib/python3.8/smtplib.py", line 310, in _get_socket
+    return socket.create_connection((host, port), timeout,
+  File "/usr/local/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/usr/local/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+[2024-01-19T04:05:33.541+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 203 for task CheckTableExisting ('branch_task_ids' must contain only valid task_ids. Invalid tasks found: {'InsertDataFunction'}.; 93)
+[2024-01-19T04:05:33.568+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-01-19T04:05:33.747+0000] {taskinstance.py:3281} INFO - 0 downstream tasks scheduled from follow-on schedule check
