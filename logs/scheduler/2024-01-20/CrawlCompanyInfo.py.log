@@ -1,0 +1,7 @@
+[2024-01-20T02:48:22.268+0000] {processor.py:161} INFO - Started process (PID=36) to work on /opt/airflow/dags/CrawlCompanyInfo.py
+[2024-01-20T02:48:22.269+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/CrawlCompanyInfo.py for tasks to queue
+[2024-01-20T02:48:22.271+0000] {logging_mixin.py:188} INFO - [2024-01-20T02:48:22.270+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/CrawlCompanyInfo.py
+[2024-01-20T02:48:22.287+0000] {processor.py:840} INFO - DAG(s) 'company_profile_pipeline' retrieved from /opt/airflow/dags/CrawlCompanyInfo.py
+[2024-01-20T02:48:22.404+0000] {logging_mixin.py:188} INFO - [2024-01-20T02:48:22.403+0000] {dag.py:3033} INFO - Sync 1 DAGs
+[2024-01-20T02:48:22.415+0000] {logging_mixin.py:188} INFO - [2024-01-20T02:48:22.415+0000] {dag.py:3820} INFO - Setting next_dagrun for company_profile_pipeline to 2024-01-19T00:00:00+00:00, run_after=2024-01-20T00:00:00+00:00
+[2024-01-20T02:48:22.427+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/CrawlCompanyInfo.py took 0.161 seconds

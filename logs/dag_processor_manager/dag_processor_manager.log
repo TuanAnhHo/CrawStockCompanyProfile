@@ -4557,3 +4557,173 @@ File Path                              PID    Runtime      # DAGs    # Errors  L
 /opt/airflow/dags/CrawlCompanyInfo.py                           1           0  0.12s           2024-01-19T09:33:32
 ================================================================================
 [2024-01-19T09:33:49.217+0000] {manager.py:451} INFO - Exiting gracefully upon receiving signal 15
+[2024-01-19T10:44:27.375+0000] {manager.py:469} INFO - Processing files using up to 2 processes at a time 
+[2024-01-19T10:44:27.376+0000] {manager.py:470} INFO - Process each file at most once every 30 seconds
+[2024-01-19T10:44:27.377+0000] {manager.py:471} INFO - Checking for new files in /opt/airflow/dags every 300 seconds
+[2024-01-19T10:44:27.378+0000] {manager.py:738} INFO - Searching for files in /opt/airflow/dags
+[2024-01-19T10:44:27.403+0000] {manager.py:741} INFO - There are 1 files in /opt/airflow/dags
+[2024-01-19T10:44:28.063+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  ----------
+/opt/airflow/dags/CrawlCompanyInfo.py     36  0.27s             0           0
+================================================================================
+[2024-01-19T10:44:58.286+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py                           1           0  0.96s           2024-01-19T10:44:28
+================================================================================
+[2024-01-19T10:45:28.507+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py                           1           0  0.90s           2024-01-19T10:44:59
+================================================================================
+[2024-01-19T10:45:59.486+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py                           1           0  0.19s           2024-01-19T10:45:30
+================================================================================
+[2024-01-19T10:46:12.885+0000] {manager.py:451} INFO - Exiting gracefully upon receiving signal 15
+[2024-01-19T12:11:30.462+0000] {manager.py:469} INFO - Processing files using up to 2 processes at a time 
+[2024-01-19T12:11:30.462+0000] {manager.py:470} INFO - Process each file at most once every 30 seconds
+[2024-01-19T12:11:30.462+0000] {manager.py:471} INFO - Checking for new files in /opt/airflow/dags every 300 seconds
+[2024-01-19T12:11:30.463+0000] {manager.py:738} INFO - Searching for files in /opt/airflow/dags
+[2024-01-19T12:11:30.468+0000] {manager.py:741} INFO - There are 1 files in /opt/airflow/dags
+[2024-01-19T12:11:30.536+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  ----------
+/opt/airflow/dags/CrawlCompanyInfo.py     36  0.03s             0           0
+================================================================================
+[2024-01-19T12:12:00.836+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py     43  0.01s             1           0  0.16s           2024-01-19T12:11:30
+================================================================================
+[2024-01-19T12:12:31.223+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py     54  0.00s             1           0  0.10s           2024-01-19T12:12:00
+================================================================================
+[2024-01-19T12:13:01.548+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py     61  0.01s             1           0  0.08s           2024-01-19T12:12:31
+================================================================================
+[2024-01-19T12:13:31.959+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py                           1           0  0.11s           2024-01-19T12:13:08
+================================================================================
+[2024-01-19T12:14:02.258+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py                           1           0  0.08s           2024-01-19T12:13:39
+================================================================================
+[2024-01-19T12:14:32.576+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py                           1           0  0.10s           2024-01-19T12:14:09
+================================================================================
+[2024-01-19T12:15:02.889+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py                           1           0  0.09s           2024-01-19T12:14:39
+================================================================================
+[2024-01-19T12:15:33.215+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py                           1           0  0.07s           2024-01-19T12:15:10
+================================================================================
+[2024-01-19T12:16:03.533+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py                           1           0  0.07s           2024-01-19T12:15:40
+================================================================================
+[2024-01-19T12:16:30.800+0000] {manager.py:738} INFO - Searching for files in /opt/airflow/dags
+[2024-01-19T12:16:30.809+0000] {manager.py:741} INFO - There are 1 files in /opt/airflow/dags
+[2024-01-19T12:16:33.843+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py                           1           0  0.07s           2024-01-19T12:16:10
+================================================================================
+[2024-01-19T12:17:04.174+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                              PID    Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/CrawlCompanyInfo.py                           1           0  0.11s           2024-01-19T12:16:41
+================================================================================
+[2024-01-19T12:17:06.960+0000] {manager.py:451} INFO - Exiting gracefully upon receiving signal 15
+[2024-01-20T02:48:22.202+0000] {manager.py:469} INFO - Processing files using up to 2 processes at a time 
+[2024-01-20T02:48:22.203+0000] {manager.py:470} INFO - Process each file at most once every 30 seconds
+[2024-01-20T02:48:22.203+0000] {manager.py:471} INFO - Checking for new files in /opt/airflow/dags every 300 seconds
+[2024-01-20T02:48:22.203+0000] {manager.py:738} INFO - Searching for files in /opt/airflow/dags
+[2024-01-20T02:48:22.210+0000] {manager.py:741} INFO - There are 1 files in /opt/airflow/dags
+[2024-01-20T02:48:22.285+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------  -----  ---------  --------  ----------  --------------  ----------
+/opt/airflow/dags/CrawlCompanyInfo.py     36  0.02s             0           0
+================================================================================
+[2024-01-20T02:48:42.687+0000] {manager.py:451} INFO - Exiting gracefully upon receiving signal 15
+[2024-01-30T14:09:37.927+0000] {manager.py:469} INFO - Processing files using up to 2 processes at a time 
+[2024-01-30T14:09:37.928+0000] {manager.py:470} INFO - Process each file at most once every 30 seconds
+[2024-01-30T14:09:37.928+0000] {manager.py:471} INFO - Checking for new files in /opt/airflow/dags every 300 seconds
+[2024-01-30T14:09:37.928+0000] {manager.py:738} INFO - Searching for files in /opt/airflow/dags
+[2024-01-30T14:09:37.932+0000] {manager.py:741} INFO - There are 1 files in /opt/airflow/dags
+[2024-01-30T14:09:38.003+0000] {manager.py:879} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                    PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-----------------------------------------  -----  ---------  --------  ----------  --------------  ----------
+/opt/airflow/dags/src/CrawlCompanyInfo.py     31  0.03s             0           0
+================================================================================
+[2024-01-30T14:10:00.566+0000] {manager.py:451} INFO - Exiting gracefully upon receiving signal 15

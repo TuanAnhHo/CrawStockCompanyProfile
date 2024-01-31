@@ -1,0 +1,14 @@
+[2024-01-30T14:09:37.974+0000] {processor.py:161} INFO - Started process (PID=31) to work on /opt/airflow/dags/src/CrawlCompanyInfo.py
+[2024-01-30T14:09:37.975+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/src/CrawlCompanyInfo.py for tasks to queue
+[2024-01-30T14:09:37.977+0000] {logging_mixin.py:188} INFO - [2024-01-30T14:09:37.977+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/src/CrawlCompanyInfo.py
+[2024-01-30T14:09:37.988+0000] {logging_mixin.py:188} INFO - [2024-01-30T14:09:37.986+0000] {dagbag.py:348} ERROR - Failed to import: /opt/airflow/dags/src/CrawlCompanyInfo.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/dagbag.py", line 344, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 843, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/src/CrawlCompanyInfo.py", line 1, in <module>
+    from CrawlStockData.dags.src.AvailableStockSymbol import AvailableStock
+ModuleNotFoundError: No module named 'CrawlStockData'
+[2024-01-30T14:09:37.989+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/src/CrawlCompanyInfo.py
+[2024-01-30T14:09:38.012+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/src/CrawlCompanyInfo.py took 0.040 seconds
