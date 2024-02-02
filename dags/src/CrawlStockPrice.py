@@ -13,7 +13,7 @@ def connect_postgres():
 #       - section: section in ini file which represent for config you want to get in this situation is Postgresql section
     try:
         # read connection parameters
-        params = {'host': 'localhost', 'database': 'StockProject', 'port': '5432', 'user': 'airflow', 'password': 'airflow'}
+        params = {'host': 'postgres', 'database': 'StockProject', 'port': '5432', 'user': 'airflow', 'password': 'airflow'}
 
         # connect to the PostgreSQL server
         print('Connecting to the PostgreSQL database...')
