@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator, BranchPythonOperator
 from src.CrawlStockPrice import *
 
-config_symbol = "ACB"
+config_symbol = "VNM"
 
 # Declare default arguments in Airflow
 default_args = {
