@@ -1,13 +1,15 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator, BranchPythonOperator
 from src.CrawlStockPrice import *
+from datetime import datetime
+import pytz
 
 config_symbol = "TCB"
 
 # Declare default arguments in Airflow
 default_args = {
     'owner':'anh.ho',
-    'start_date':'2024-02-02',
+    'start_date':str(datetime.now(tz=pytz.timezone("Asia/Ho_Chi_Minh"))),
     'email':'anh.ho@tititada.com',
     'retries':0,
 }
