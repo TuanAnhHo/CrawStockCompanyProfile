@@ -1,6 +1,6 @@
+from src.CrawlStockPrice import *
 from airflow import DAG
 from airflow.operators.python import PythonOperator, BranchPythonOperator
-from src.CrawlStockPrice import *
 from datetime import datetime
 import pytz
 
@@ -15,7 +15,7 @@ default_args = {
 }
 
 dag= DAG(
-    dag_id="company_profile_pipeline",
+    dag_id="stock_price_pipeline",
     default_args=default_args,
     schedule='@daily',
     catchup=True
