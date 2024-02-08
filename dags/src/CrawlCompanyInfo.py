@@ -1,121 +1,46 @@
 from .AvailableStockSymbol import AvailableStock                           
-from psycopg2 import OperationalError
 from datetime import datetime
-import pytz, requests, psycopg2
+from pymongo import MongoClient
+import requests, pytz
 
+# Connect to Mongo
+def connect_mongodb():
+    print("Connecting to MongoDB.....")    
+    
+    # Provide the connection details
+    hostname = 'mongo'
+    port = 27017  # Default MongoDB port
+    username = 'root'  # If authentication is required
+    password = 'example'  # If authentication is required
 
-# Connect to Postgresql
-def connect_postgres():
-
-#   Connect to the PostgreSQL database server 
-#   Parameters: 
-#       - relative_path: path to ini file which contains connection informations
-#       - section: section in ini file which represent for config you want to get in this situation is Postgresql section
+    # Create a MongoClient instance
     try:
-        # read connection parameters
-        params = {'host': 'postgres', 'database': 'StockProject', 'port': '5432', 'user': 'airflow', 'password': 'airflow'}
-
-        # connect to the PostgreSQL server
-        print('Connecting to the PostgreSQL database...')
-        conn = psycopg2.connect(**params)
-            
-        # create a cursor
-        cur = conn.cursor()
-            
-        # execute a statement
-        print('PostgreSQL database version:')
-        cur.execute('SELECT version()')
-
-        # display the PostgreSQL database server version
-        db_version = cur.fetchone()
-        print("Successfully connect to Postgresql")
-        print(db_version)
-
-    except OperationalError as e:
-        raise e
-        
-    return conn
-
-
-# Condition function to decide create table or not 
-def check_table_existing(table_name:str):
-    
-    # Get cursor of Postgresql
-    cursor = connect_postgres().cursor()
-
-    print("Checking existing table...")
-    
-    get_existing_table_script = "SELECT tablename FROM pg_tables WHERE schemaname = 'public'"
-    cursor.execute(get_existing_table_script)
-    
-    list_table = [i[0] for i in cursor.fetchall()]
-    
-    if table_name in list_table:
-        return "ExistingCompanyProfile"
-    else: 
-        return "CreateCompanyProfileTable"
-
-
-# Create table if it not exist
-def create_profile_company_table():
-    create_company_profile_script = """
-    CREATE TABLE public.company_profile (
-        institutionid text NOT NULL,\n
-        symbol text NOT NULL,\n
-        icbcode text NULL,\n
-        companyname text NULL,\n
-        shortname text NULL,\n
-        internationalname text NULL,\n
-        phone text NULL,\n
-        employees numeric NULL,\n
-        branches numeric NULL,\n
-        establishmentdate timestamp NULL,\n
-        chartercapital numeric NULL,\n
-        dateoflisting timestamp NULL,\n
-        exchange text NULL,\n
-        listingvolume numeric NULL,\n
-        stateownership numeric NULL,\n
-        foreignownership numeric NULL,\n
-        otherownership numeric NULL,\n
-        overview text,\n
-        created_date timestamp,\n
-        updated_date timestamp,\n
-	CONSTRAINT company_profile_pk PRIMARY KEY (institutionid, symbol));\n
-    """
-    conn = connect_postgres()
-    cursor = conn.cursor()
-    
-    print("Create company_profile table.....")
-    
-    try:
-        cursor.execute(create_company_profile_script)
-        conn.commit()
-        cursor.close()
-        print("Create company_profile table successfully")
+        client = MongoClient(hostname, port, username=username, password=password)
+        # Return client 
+        return client
     except:
-        raise ValueError("Failed to create company_proflie table")
+        raise ValueError("Failed to connect to MongoDB")
 
 
-# Condition function to decided with branch of code needed to execute
-def existing_company_profile(symbol:str) -> str:
+def check_existing_company_profile(symbol: str):
+    client = connect_mongodb()
+    db = client["StockProject"]
+    col = db["CompanyProfile"]
     
-    # Get cursor connection
-    cursor = connect_postgres().cursor()
-
-    # Get existing symbol in company_profile table
-    get_existing_symbol_script = "SELECT DISTINCT SYMBOL FROM PUBLIC.COMPANY_PROFILE CP"
-    cursor.execute(get_existing_symbol_script)
-    existing_symbol_list = [i[0] for i in cursor]
-    cursor.close()
+    print("Checking existing company profile.....")
+    # Check existing profile of input symbol
+    my_query = {'symbol':symbol}
+    query_result = col.find_one(my_query)
+    client.close()
     
-    if symbol in existing_symbol_list:
+    if query_result is None:
+        return 'InsertCompanyProfile'
+    else:
         return 'UpdateCompanyProfile'
-    else: 
-        return 'InsertCompanyProfile_branch_2'
 
 
 # Function to crawl company profile from FireAnt
-def crawl_company_info(symbol:str):
+def crawl_company_info(symbol: str):
 
     if symbol not in AvailableStock['symbol']:
         raise ValueError("The symbol is not availble. Please try another symbol")
@@ -130,7 +55,7 @@ def crawl_company_info(symbol:str):
         
     try:
         response = requests.get(request_url, headers=headers)
-        print("API Status Code " + str(response.status_code))
+        print("Crawl company profile successfully (API Status Code " + str(response.status_code) + ")")
     except requests.exceptions.HTTPError as err:
         raise SystemExit(err)
 
@@ -145,84 +70,62 @@ def crawl_company_info(symbol:str):
     company_profile_dict = {str(i): company_profile[i] for i in list_crawl_key}
     company_profile_dict['overview'] = company_profile['overview'].replace('\r\n', '')
     company_profile_dict['created_date'] = current_time
-    company_profile_dict['updated_date'] = None
     
     return company_profile_dict
 
 
 # Insert data in to company_profile table
-def insert_company_profile(symbol:str, table_name:str):
+def insert_company_profile(symbol: str):
     
-    ## Get connection and change to cursor
-    conn = connect_postgres()
-    cursor = conn.cursor()
-
-    ## Company profile data 
+    # Get connection and change to cursor
+    client = connect_mongodb()
+    db = client['StockProject']
+    col = db['CompanyProfile']
+    
+    # Company profile data 
     print("Get Company profile of {symbol} symbol".format(symbol=symbol))
-    data = crawl_company_info(symbol)
+    company_profile_data = crawl_company_info(symbol)
 
-    ## Get columns name to insert data into table
-    columns_list = data.keys()
-    columns = ', '.join(x for x in columns_list)
-
-    ## Get value to insert data into table
-    values = tuple(data.values())
-
-    insert_data_script = """
-            INSERT INTO public.{table_name} ({columns})
-            VALUES {values}
-        """.format(table_name=table_name, columns=columns, values=values)
-    
-    insert_data_script = insert_data_script.replace("None", "NULL")
-    
-    print("Insert profile of {symbol} symbol into table {table_name} in Postgresql.....".format(symbol=symbol, table_name="company_profile"))
+    # insert data into table    
+    print("Insert profile of {symbol} symbol into table {table_name} in MongoDB.....".format(symbol=symbol, table_name="company_profile"))
     
     try:
-        cursor.execute(insert_data_script)
-        conn.commit()
-        print("Inserted data successfully")
+        col.insert_one(company_profile_data)
+        print("Insert company profile of {symbol} into MongoDB successfully".format(symbol=symbol))
+        client.close()
+    except:
+        raise ValueError("Failed to insert company profile of {symbol} into MongoDB".format(symbol=symbol))
+    
+    client.close()
+
+
+def update_company_profile(symbol: str):
+    
+    # Get connection and change to cursor
+    client = connect_mongodb()
+    db = client['StockProject']
+    col = db['CompanyProfile']
+    
+    # column query
+    my_query = {'symbol':symbol}
+    
+    # delete existing symbol profile in collection
+    print("Deleting existing compay profile in collection.....")
+    try:
+        col.delete_one(my_query)
+    except:
+        raise ValueError("Failed to delete exising company profile of {symbol}".format(symbol=symbol))
         
-        conn.close()
-        print("Close connection")
+    # Crawl company profile
+    print("Crawling company profile of {symbol}.....".format(symbol=symbol))
+    company_profile_data = crawl_company_info(symbol)
     
-    except:
-        raise ValueError("Failed to insert data")
-
-
-def update_company_profile(symbol:str, table_name:str):
-
-    ## Get connection and change to cursor
-    conn = connect_postgres()
-    cursor = conn.cursor()
-
-    ## Company profile data 
-    print("Get Company profile of {symbol} symbol".format(symbol=symbol))
-    data = crawl_company_info(symbol)
-    data.pop('created_date')
-    data['updated_date'] = datetime.now(tz=pytz.timezone('Asia/Ho_Chi_Minh')).strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
-
-    values_change_list = []
-    for x,y in data.items():
-        values_change_list.append(str(x)+'='+"'"+str(y)+"'")
-
-    values_change = ',\n        '.join(values_change_list).replace("'None'",'NULL')
-
-    update_data_scripts = """
-    UPDATE {table_name} 
-    SET 
-        {values_change} 
-    WHERE symbol = '{symbol}';
-    """.format(table_name=table_name, symbol=symbol, values_change=values_change)
-
-    print("Update profile of {symbol} symbol into table {table_name} in Postgresql.....".format(symbol=symbol, table_name="company_profile"))
-
+    # insert data into collection
     try:
-        cursor.execute(update_data_scripts)
-        conn.commit()
-        print("Update data successfully")
-
-        conn.close()
-        print("Close connection")
-
+        print("Insert company profile of {symbol} into collection".format(symbol=symbol))
+        col.insert_one(company_profile_data)
+        client.close()
     except:
-        raise ValueError(f"Failed to update data into {table_name} table".format(table_name=table_name))
+        raise ValueError("Failed to insert company profile of {symbol} into collection".format(symbol=symbol))
+    
+    client.close()
